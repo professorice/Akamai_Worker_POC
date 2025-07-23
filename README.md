@@ -1,49 +1,49 @@
-### Akamai Edge POC
+# Akamai EdgeWorker with LaunchDarkly Integration
 
-This is an internal POC with Akamai's EW runtime.
+This project demonstrates a Akamai EdgeWorker implementation that integrates with LaunchDarkly for feature flag management at the edge.
 
-## Getting started
+## Setup
 
-1. Run the following command to install dependencies
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-```shell
-npm install
-```
+2. **Configure LaunchDarkly**
+   Update `ldClient.ts` with your LaunchDarkly environment details:
+   ```typescript
+   sdkKey: 'Your-launchdarkly-environment-client-id'
+   ```
 
-2. Install the [Akamai CLI](https://github.com/akamai/cli)
+3. **Build the EdgeWorker**
+   ```bash
+   npm run build
+   ```
 
-```shell
-brew install akamai
-```
+4. **Deploy to Akamai**
+   ```bash
+   npm run validate 
+   npm run dev     
+   ```
 
-3. Follow [these instructions](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials) to add your credentials to the CLI.
+The EdgeWorker adds one identification header:
+- `X-EdgeWorker-LaunchDarkly`: Indicates LaunchDarkly integration is enabled
 
-4. Install the edgeworkers CLI package
+## Development
 
-```shell
-akamai install edgeworkers
-```
-
-5. Install the sandbox CLI package
-
-```shell
-akamai install sandbox
-```
-
-6. Create a local sandbox
-
-```shell
-akamai sandbox create --property hello-akamai.dev.launchdarkly.com:15 --name <YOUR_NAME>CODING_SANDBOX
-```
-
-7. Transpile the code, create the bundle, and update the Sandbox client
-
-```shell
+### Local Testing
+```bash
 npm run dev
 ```
 
-8. Run the following command to test the EdgeWorker
-
-```shell
-curl -v -H 'Host: hello-akamai.dev.launchdarkly.com' -H 'Pragma: akamai-x-ew-debug'  http://127.0.0.1:9550/hello
+### Building for Production
+```bash
+npm run build
+npm run validate
 ```
+
+## Learn More
+
+- [Akamai EdgeWorkers Documentation](https://techdocs.akamai.com/edgeworkers/docs)
+- [LaunchDarkly Akamai SDK](https://docs.launchdarkly.com/sdk/server-side/akamai)
+- [EdgeWorkers Examples](https://github.com/akamai/edgeworkers-examples)
